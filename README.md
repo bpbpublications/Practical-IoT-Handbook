@@ -1,2 +1,2 @@
-# IoT Cookbook
-IoT Cookbook, by BPB Publications
+# Practical IoT Handbook
+Practical IoT Handbook, by BPB Publications
