@@ -1,0 +1,80 @@
+[
+    {
+        "id": "cdcd319459f68294",
+        "type": "influxdb out",
+        "z": "020914da0eded4c7",
+        "influxdb": "2ec051a6836f7e24",
+        "name": "temperature_sensor",
+        "measurement": "temperature_sensor",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "iotconsulting",
+        "bucket": "iotlab",
+        "x": 700,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "463a55da445e6544",
+        "type": "inject",
+        "z": "020914da0eded4c7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "7f2d9e8a7e1da04a"
+            ]
+        ]
+    },
+    {
+        "id": "7f2d9e8a7e1da04a",
+        "type": "function",
+        "z": "020914da0eded4c7",
+        "name": "Write data",
+        "func": "// @ts-nocheck\n\nmsg.payload = [{\n    temperature: 22.5\n},\n{\n    location:\"lab\"\n}];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "cdcd319459f68294"
+            ]
+        ]
+    },
+    {
+        "id": "2ec051a6836f7e24",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.0.28:8086",
+        "timeout": "10",
+        "rejectUnauthorized": false
+    }
+]

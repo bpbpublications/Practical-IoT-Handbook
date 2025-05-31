@@ -1,0 +1,54 @@
+[
+    {
+        "id": "618baad70411c88f",
+        "type": "coap in",
+        "z": "e237f4a1.bd2cd",
+        "method": "PUT",
+        "name": "PUT /actuators/relay",
+        "server": "ab3060f4c7e96482",
+        "url": "/actuators/relay",
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "89ebb7627a31a5ec",
+                "a3b96082864fa589"
+            ]
+        ]
+    },
+    {
+        "id": "89ebb7627a31a5ec",
+        "type": "coap response",
+        "z": "e237f4a1.bd2cd",
+        "name": "",
+        "statusCode": "",
+        "contentFormat": "text/plain",
+        "x": 510,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a3b96082864fa589",
+        "type": "debug",
+        "z": "e237f4a1.bd2cd",
+        "name": "Relay state after PUT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ab3060f4c7e96482",
+        "type": "coap-server",
+        "name": "CoAP Server",
+        "port": "5683",
+        "ipv6": false
+    }
+]

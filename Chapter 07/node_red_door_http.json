@@ -1,0 +1,50 @@
+[
+    {
+        "id": "e2b73bde6a2a3226",
+        "type": "http in",
+        "z": "776cac42b2d61632",
+        "name": "Door PUT",
+        "url": "/office/door",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "eae195314302f7f1",
+                "88aba6d3fafa8226",
+                "cfaca817e74fccca",
+                "bd11d0d3b2249cf2"
+            ]
+        ]
+    },
+    {
+        "id": "cfaca817e74fccca",
+        "type": "http response",
+        "z": "776cac42b2d61632",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 330,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "eae195314302f7f1",
+        "type": "debug",
+        "z": "776cac42b2d61632",
+        "name": "Door debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 230,
+        "y": 360,
+        "wires": []
+    }
+]

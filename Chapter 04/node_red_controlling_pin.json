@@ -1,0 +1,83 @@
+[
+    {
+        "id": "85a100e89bf5b5f2",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c762ee0c3001ed4f",
+        "type": "inject",
+        "z": "85a100e89bf5b5f2",
+        "name": "ON",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "4b6a6bd3f485dcdc"
+            ]
+        ]
+    },
+    {
+        "id": "3046500356e51087",
+        "type": "inject",
+        "z": "85a100e89bf5b5f2",
+        "name": "OFF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "4b6a6bd3f485dcdc"
+            ]
+        ]
+    },
+    {
+        "id": "4b6a6bd3f485dcdc",
+        "type": "rpi-gpio out",
+        "z": "85a100e89bf5b5f2",
+        "name": "",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 560,
+        "y": 200,
+        "wires": []
+    }
+]

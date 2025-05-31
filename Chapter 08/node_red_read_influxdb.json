@@ -1,0 +1,82 @@
+[
+    {
+        "id": "aa3daa2e8cbdcc6f",
+        "type": "influxdb in",
+        "z": "020914da0eded4c7",
+        "influxdb": "2ec051a6836f7e24",
+        "name": "Read data",
+        "query": "from(bucket: \"iotlab\")\n  |> range(start: 2024-02-18T23:36:40.645Z, stop: 2024-02-20T23:36:40.645Z)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"temperature_sensor\")\n  |> filter(fn: (r) => r[\"_field\"] == \"temperature\")\n  |> filter(fn: (r) => r[\"location\"] == \"lab\" or r[\"location\"] == \"office\")\n ",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "iotconsulting",
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "75f924dd31c5b423"
+            ]
+        ]
+    },
+    {
+        "id": "088aefeb509d6184",
+        "type": "inject",
+        "z": "020914da0eded4c7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 420,
+        "wires": [
+            [
+                "aa3daa2e8cbdcc6f"
+            ]
+        ]
+    },
+    {
+        "id": "75f924dd31c5b423",
+        "type": "debug",
+        "z": "020914da0eded4c7",
+        "name": "output data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2ec051a6836f7e24",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.0.28:8086",
+        "timeout": "10",
+        "rejectUnauthorized": false
+    }
+]

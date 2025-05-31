@@ -1,0 +1,528 @@
+[
+    {
+        "id": "412d9a18ecd7be3b",
+        "type": "debug",
+        "z": "334b66c1fc517b41",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "da8434374a5d563f",
+        "type": "openweathermap",
+        "z": "334b66c1fc517b41",
+        "name": "",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "Buenos Aires",
+        "country": "Argentina",
+        "language": "en",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "412d9a18ecd7be3b",
+                "a048d77419acbe4d",
+                "4418319beb5e7e05",
+                "02f3180f763fb4a0",
+                "a4943ca19028b842",
+                "53e51912f1b7a378"
+            ]
+        ]
+    },
+    {
+        "id": "ce884a2d1d86edae",
+        "type": "inject",
+        "z": "334b66c1fc517b41",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "da8434374a5d563f"
+            ]
+        ]
+    },
+    {
+        "id": "1e63f9687b53c486",
+        "type": "ui-text",
+        "z": "334b66c1fc517b41",
+        "group": "e002060f225f4a5d",
+        "order": 0,
+        "width": "1",
+        "height": "1",
+        "name": "",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 810,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a048d77419acbe4d",
+        "type": "function",
+        "z": "334b66c1fc517b41",
+        "name": "Get Status",
+        "func": "msg.payload = msg.payload.weather;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 180,
+        "wires": [
+            [
+                "1e63f9687b53c486"
+            ]
+        ]
+    },
+    {
+        "id": "4418319beb5e7e05",
+        "type": "function",
+        "z": "334b66c1fc517b41",
+        "name": "Get Temp",
+        "func": "msg.payload = msg.payload.tempc;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 360,
+        "wires": [
+            [
+                "d1ee13c3a25da269",
+                "2fae2ac832f1f3a4"
+            ]
+        ]
+    },
+    {
+        "id": "d1ee13c3a25da269",
+        "type": "ui-gauge",
+        "z": "334b66c1fc517b41",
+        "name": "",
+        "group": "e002060f225f4a5d",
+        "order": 0,
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-5",
+                "color": "#0000ff"
+            },
+            {
+                "from": "15",
+                "color": "#00ff00"
+            },
+            {
+                "from": "25",
+                "color": "#f6fa00"
+            },
+            {
+                "from": "35",
+                "color": "#f23202"
+            }
+        ],
+        "min": "-5",
+        "max": "45",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 850,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "02f3180f763fb4a0",
+        "type": "function",
+        "z": "334b66c1fc517b41",
+        "name": "Get Humidity",
+        "func": "msg.payload = msg.payload.humidity;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 480,
+        "wires": [
+            [
+                "29513aaccb5b7eb4",
+                "3a6e2dd4b64d6d0e"
+            ]
+        ]
+    },
+    {
+        "id": "a4943ca19028b842",
+        "type": "function",
+        "z": "334b66c1fc517b41",
+        "name": "Get Pressure",
+        "func": "msg.payload = msg.payload.pressure;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 560,
+        "wires": [
+            [
+                "c26c27608457826b",
+                "6af94376064fe1e2"
+            ]
+        ]
+    },
+    {
+        "id": "29513aaccb5b7eb4",
+        "type": "ui-gauge",
+        "z": "334b66c1fc517b41",
+        "name": "",
+        "group": "e002060f225f4a5d",
+        "order": 0,
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Humidity",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "40",
+                "color": "#00fa60"
+            },
+            {
+                "from": "80",
+                "color": "#00fbff"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 840,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c26c27608457826b",
+        "type": "ui-gauge",
+        "z": "334b66c1fc517b41",
+        "name": "",
+        "group": "e002060f225f4a5d",
+        "order": 0,
+        "width": "2",
+        "height": "2",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Pressure",
+        "units": "hPa",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "800",
+                "color": "#000000"
+            }
+        ],
+        "min": "800",
+        "max": "1200",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 860,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "17c1ce10231bb511",
+        "type": "ui-text",
+        "z": "334b66c1fc517b41",
+        "group": "e002060f225f4a5d",
+        "order": 0,
+        "width": "3",
+        "height": "1",
+        "name": "",
+        "label": "Temperature Forecast",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 900,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "53e51912f1b7a378",
+        "type": "function",
+        "z": "334b66c1fc517b41",
+        "name": "Get Forecast",
+        "func": "\nconst maxTemp = msg.payload.temp_maxc.toFixed(1);\nconst minTemp = msg.payload.temp_minc.toFixed(1);\nmsg.payload = `Max temp: ${maxTemp}°C Min temp: ${minTemp}°C`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 300,
+        "wires": [
+            [
+                "17c1ce10231bb511"
+            ]
+        ]
+    },
+    {
+        "id": "2fae2ac832f1f3a4",
+        "type": "ui-chart",
+        "z": "334b66c1fc517b41",
+        "group": "e002060f225f4a5d",
+        "name": "",
+        "label": "Temperature",
+        "order": 9007199254740991,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "",
+        "ymax": "",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#6ebfb2",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "x": 850,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a6e2dd4b64d6d0e",
+        "type": "ui-chart",
+        "z": "334b66c1fc517b41",
+        "group": "e002060f225f4a5d",
+        "name": "",
+        "label": "Humidity",
+        "order": 9007199254740991,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "",
+        "ymax": "",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "x": 840,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6af94376064fe1e2",
+        "type": "ui-chart",
+        "z": "334b66c1fc517b41",
+        "group": "e002060f225f4a5d",
+        "name": "",
+        "label": "Pressure",
+        "order": 9007199254740991,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "",
+        "ymax": "",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#9ab31e",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "x": 860,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e002060f225f4a5d",
+        "type": "ui-group",
+        "name": "Buenos Aires",
+        "page": "ea14a4109279729b",
+        "width": "12",
+        "height": "3",
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ea14a4109279729b",
+        "type": "ui-page",
+        "name": "Open Weather",
+        "ui": "965d08f4a4fd9392",
+        "path": "/openweather",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "1c628fe33212217c",
+        "order": -1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "965d08f4a4fd9392",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "navigationStyle": "default"
+    },
+    {
+        "id": "1c628fe33212217c",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]

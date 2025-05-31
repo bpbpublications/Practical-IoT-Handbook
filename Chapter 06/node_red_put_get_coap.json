@@ -1,0 +1,139 @@
+[
+    {
+        "id": "618baad70411c88f",
+        "type": "coap in",
+        "z": "e237f4a1.bd2cd",
+        "method": "PUT",
+        "name": "PUT /actuators/relay",
+        "server": "ab3060f4c7e96482",
+        "url": "/actuators/relay",
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "89ebb7627a31a5ec",
+                "5eb20b0dddb649df"
+            ]
+        ]
+    },
+    {
+        "id": "89ebb7627a31a5ec",
+        "type": "coap response",
+        "z": "e237f4a1.bd2cd",
+        "name": "",
+        "statusCode": "",
+        "contentFormat": "text/plain",
+        "x": 510,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fc90b83ecadfd472",
+        "type": "debug",
+        "z": "e237f4a1.bd2cd",
+        "name": "Get relay state with GET",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "cdede0d8514dfe67",
+        "type": "coap in",
+        "z": "e237f4a1.bd2cd",
+        "method": "GET",
+        "name": "GET /actuators/relay",
+        "server": "ab3060f4c7e96482",
+        "url": "/actuators/relay",
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "9a95ad2d56999a6a"
+            ]
+        ]
+    },
+    {
+        "id": "06f3355ff56d176c",
+        "type": "coap response",
+        "z": "e237f4a1.bd2cd",
+        "name": "",
+        "statusCode": "",
+        "contentFormat": "text/plain",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a3b96082864fa589",
+        "type": "debug",
+        "z": "e237f4a1.bd2cd",
+        "name": "Relay state after PUT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5eb20b0dddb649df",
+        "type": "function",
+        "z": "e237f4a1.bd2cd",
+        "name": "Store value from PUT",
+        "func": "var relay_state = flow.get('relay_state')\n\nflow.set('relay_state', msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "a3b96082864fa589"
+            ]
+        ]
+    },
+    {
+        "id": "9a95ad2d56999a6a",
+        "type": "function",
+        "z": "e237f4a1.bd2cd",
+        "name": "Get value",
+        "func": "var relay_state = flow.get('relay_state')\n\nmsg.payload = relay_state\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 380,
+        "wires": [
+            [
+                "fc90b83ecadfd472",
+                "06f3355ff56d176c"
+            ]
+        ]
+    },
+    {
+        "id": "ab3060f4c7e96482",
+        "type": "coap-server",
+        "name": "CoAP Server",
+        "port": "5683",
+        "ipv6": false
+    }
+]

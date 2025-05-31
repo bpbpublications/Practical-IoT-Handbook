@@ -1,0 +1,75 @@
+[
+    {
+        "id": "6e492162e558ef41",
+        "type": "websocket in",
+        "z": "3f0812a4afdf9421",
+        "name": "Temp Sensor WS",
+        "server": "6d055a8184c29976",
+        "client": "",
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "878e4c6480a5670e"
+            ]
+        ]
+    },
+    {
+        "id": "878e4c6480a5670e",
+        "type": "debug",
+        "z": "3f0812a4afdf9421",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "d0ac0bc05689a649",
+        "type": "inject",
+        "z": "3f0812a4afdf9421",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temp\":25}",
+        "payloadType": "json",
+        "x": 380,
+        "y": 540,
+        "wires": [
+            [
+                "d2646e8bdbd0d1c0"
+            ]
+        ]
+    },
+    {
+        "id": "d2646e8bdbd0d1c0",
+        "type": "websocket out",
+        "z": "3f0812a4afdf9421",
+        "name": "",
+        "server": "6d055a8184c29976",
+        "client": "",
+        "x": 720,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "6d055a8184c29976",
+        "type": "websocket-listener",
+        "path": "/ws/temp_sensor",
+        "wholemsg": "false"
+    }
+]

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatGPT Web Interface</title>
+</head>
+<body>
+    <h1>Chat with ChatGPT</h1>
+    <form action="/chat" method="post">
+        <textarea name="chat_history" rows="10" cols="50">{{ chat_history }}</textarea>
+        <br>
+        <input type="text" name="user_message" placeholder="Your message">
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Example configuration entry
+esphome:
+   name: "rpipicow"
+
+wifi:
+  ssid: Your-WiFi
+  password: Your-WiFi-Key
+  
+api:
+
+rp2040:
+  board: rpipicow
+  framework:
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
+    
+    
+i2c:
+  sda: 4
+  scl: 5
+
+      
+sensor:
+  - platform: sgp30
+    eco2:
+      name: "Workshop eCO2"
+      accuracy_decimals: 1
+    tvoc:
+      name: "Workshop TVOC"
+      accuracy_decimals: 1
+    store_baseline: yes
+    address: 0x58
+    update_interval: 1s

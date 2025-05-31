@@ -1,0 +1,194 @@
+[
+    {
+        "id": "c8f041804617c5c4",
+        "type": "inject",
+        "z": "020914da0eded4c7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 540,
+        "wires": [
+            [
+                "36337531ad202ecb",
+                "f5f32b47b28b7da8"
+            ]
+        ]
+    },
+    {
+        "id": "b78630e6cd91060c",
+        "type": "debug",
+        "z": "020914da0eded4c7",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "36337531ad202ecb",
+        "type": "Loadavg",
+        "z": "020914da0eded4c7",
+        "name": "",
+        "x": 380,
+        "y": 480,
+        "wires": [
+            [
+                "a6fd14e1a1d6596f"
+            ]
+        ]
+    },
+    {
+        "id": "f5f32b47b28b7da8",
+        "type": "Memory",
+        "z": "020914da0eded4c7",
+        "name": "",
+        "scale": "Megabyte",
+        "x": 380,
+        "y": 600,
+        "wires": [
+            [
+                "26684925d8741ee3"
+            ]
+        ]
+    },
+    {
+        "id": "e83cb235cb9a2459",
+        "type": "influxdb out",
+        "z": "020914da0eded4c7",
+        "influxdb": "2ec051a6836f7e24",
+        "name": "system load",
+        "measurement": "system_load",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "iotconsulting",
+        "bucket": "iotlab",
+        "x": 1010,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "26684925d8741ee3",
+        "type": "join",
+        "z": "020914da0eded4c7",
+        "name": "join objects",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 670,
+        "y": 560,
+        "wires": [
+            [
+                "103711006b6cd6c5",
+                "694f80b98079ad23"
+            ]
+        ]
+    },
+    {
+        "id": "a6fd14e1a1d6596f",
+        "type": "function",
+        "z": "020914da0eded4c7",
+        "name": "load_object",
+        "func": "\nmsg.payload = {\n    \"load_1\": msg.payload.loadavg[0],\n    \"load_5\": msg.payload.loadavg[1],\n    \"load_15\": msg.payload.loadavg[2]\n\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 480,
+        "wires": [
+            [
+                "26684925d8741ee3"
+            ]
+        ]
+    },
+    {
+        "id": "103711006b6cd6c5",
+        "type": "function",
+        "z": "020914da0eded4c7",
+        "name": "add tag",
+        "func": "msg.payload= [\n    msg.payload\n,\n    {\n        \"device\": \"raspberrypi\"\n    }\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 560,
+        "wires": [
+            [
+                "b78630e6cd91060c",
+                "e83cb235cb9a2459"
+            ]
+        ]
+    },
+    {
+        "id": "694f80b98079ad23",
+        "type": "debug",
+        "z": "020914da0eded4c7",
+        "name": "debug 76",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2ec051a6836f7e24",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.0.28:8086",
+        "timeout": "10",
+        "rejectUnauthorized": false
+    }
+]

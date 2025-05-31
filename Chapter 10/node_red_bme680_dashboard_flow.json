@@ -1,0 +1,428 @@
+[
+    {
+        "id": "2f77cdc0faaf7865",
+        "type": "bme680rpi",
+        "z": "045c531ecf68fa7f",
+        "name": "",
+        "bus": "1",
+        "address": "0x77",
+        "interval": "60000",
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "6c1f9db6e52ef726",
+                "7fc8faa987ddcabf",
+                "78de9b395f5265a5",
+                "1063b721df2f18f3",
+                "217583d8168a1f99",
+                "6a25af22aafd79ec"
+            ]
+        ]
+    },
+    {
+        "id": "6c1f9db6e52ef726",
+        "type": "debug",
+        "z": "045c531ecf68fa7f",
+        "name": "debug BME680",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "58e8dc189e8484e2",
+        "type": "ui-gauge",
+        "z": "045c531ecf68fa7f",
+        "name": "",
+        "group": "71be2e8c8712c452",
+        "order": 1,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#5c6ad6"
+            },
+            {
+                "from": "10",
+                "color": "#00ff00"
+            },
+            {
+                "from": "25",
+                "color": "#ebd700"
+            },
+            {
+                "from": "40",
+                "color": "#ff0026"
+            }
+        ],
+        "min": "-10",
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 790,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7fc8faa987ddcabf",
+        "type": "function",
+        "z": "045c531ecf68fa7f",
+        "name": "Select Temperature",
+        "func": "msg.payload = msg.payload.temperature_C\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "58e8dc189e8484e2",
+                "cbd18d31e60158f7"
+            ]
+        ]
+    },
+    {
+        "id": "78de9b395f5265a5",
+        "type": "function",
+        "z": "045c531ecf68fa7f",
+        "name": "Select Humidity",
+        "func": "msg.payload = msg.payload.humidity_pc\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "17a8a268d024fd50",
+                "b4dab3b6dc78482d"
+            ]
+        ]
+    },
+    {
+        "id": "17a8a268d024fd50",
+        "type": "ui-gauge",
+        "z": "045c531ecf68fa7f",
+        "name": "",
+        "group": "71be2e8c8712c452",
+        "order": 2,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Relative Humidity",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffe45c"
+            },
+            {
+                "from": "50",
+                "color": "#5cd65c"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 810,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3943b9d9e7247f69",
+        "type": "ui-gauge",
+        "z": "045c531ecf68fa7f",
+        "name": "",
+        "group": "71be2e8c8712c452",
+        "order": 3,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Atmospheric Pressure",
+        "units": "hPa",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "900",
+                "color": "#25d219"
+            },
+            {
+                "from": "1000",
+                "color": "#f0e80f"
+            }
+        ],
+        "min": "900",
+        "max": "1100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1063b721df2f18f3",
+        "type": "function",
+        "z": "045c531ecf68fa7f",
+        "name": "Select Pressure",
+        "func": "msg.payload = msg.payload.pressure_hPa\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "3943b9d9e7247f69",
+                "a8e6b768eaec5cd1"
+            ]
+        ]
+    },
+    {
+        "id": "cbd18d31e60158f7",
+        "type": "ui-chart",
+        "z": "045c531ecf68fa7f",
+        "group": "3207fc34122520d3",
+        "name": "Temperature",
+        "label": "Temperature",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "",
+        "ymax": "",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": "9",
+        "height": "3",
+        "className": "",
+        "x": 790,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4dab3b6dc78482d",
+        "type": "ui-chart",
+        "z": "045c531ecf68fa7f",
+        "group": "3207fc34122520d3",
+        "name": "Relative Humidity",
+        "label": "Relative Humidity",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "100",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": "9",
+        "height": "3",
+        "className": "",
+        "x": 810,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8e6b768eaec5cd1",
+        "type": "ui-chart",
+        "z": "045c531ecf68fa7f",
+        "group": "3207fc34122520d3",
+        "name": "Atmospheric Pressure",
+        "label": "Atmospheric Pressure",
+        "order": 3,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "msg",
+        "xAxisType": "time",
+        "yAxisProperty": "",
+        "ymin": "",
+        "ymax": "",
+        "action": "append",
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "width": "9",
+        "height": "3",
+        "className": "",
+        "x": 780,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "71be2e8c8712c452",
+        "type": "ui-group",
+        "name": "Current Values",
+        "page": "71618124de9c2b66",
+        "width": "3",
+        "height": "9",
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "3207fc34122520d3",
+        "type": "ui-group",
+        "name": "Trends",
+        "page": "71618124de9c2b66",
+        "width": "9",
+        "height": "7",
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "71618124de9c2b66",
+        "type": "ui-page",
+        "name": "Weather Station",
+        "ui": "965d08f4a4fd9392",
+        "path": "/weather",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "1c628fe33212217c",
+        "order": -1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "965d08f4a4fd9392",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "navigationStyle": "default"
+    },
+    {
+        "id": "1c628fe33212217c",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]

@@ -1,0 +1,40 @@
+[
+    {
+        "id": "2f77cdc0faaf7865",
+        "type": "bme680rpi",
+        "z": "045c531ecf68fa7f",
+        "name": "",
+        "bus": "1",
+        "address": "0x77",
+        "interval": "60000",
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "6c1f9db6e52ef726",
+                "7fc8faa987ddcabf",
+                "78de9b395f5265a5",
+                "1063b721df2f18f3",
+                "217583d8168a1f99",
+                "6a25af22aafd79ec"
+            ]
+        ]
+    },
+    {
+        "id": "6c1f9db6e52ef726",
+        "type": "debug",
+        "z": "045c531ecf68fa7f",
+        "name": "debug BME680",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 460,
+        "wires": []
+    }
+]
